@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='column is-4 is-offset-4'>
+    <h3 class='title'>Add Drink</h3>
+    <div class='box'>
+        <form method="POST" action='/add_drink'>
+            <div class='field'>
+                <div class='select'>
+                    <select name='drink_type_id'>
+                        {% for type in drinktypes %}
+                        <option value='{{type.id}}'>{{type.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
