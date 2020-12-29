@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_cors import cross_origin
 from flask_login import login_required
 from . import db
 from .models import Drink, DrinkType
@@ -51,6 +52,7 @@ def add_drinktype_post():
     return redirect(url_for('main.add_drink'))
 
 @main.route('/get_drinks')
+@cross_origin()
 def get_drinks():
     drinks = Drink.query.all()
 

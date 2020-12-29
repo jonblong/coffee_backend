@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
@@ -7,6 +8,7 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    cors = CORS(app)
 
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     ## app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
