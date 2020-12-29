@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_required
 from . import db
 from .models import Drink, DrinkType
@@ -19,7 +19,8 @@ def add_drink():
 @login_required
 def add_drink_post():
     drinktype_id = request.form.get('drink_type_id')
-    new_drink = Drink(drinktype_id=drinktype_id)
+    note = request.form.get('note')
+    new_drink = Drink(drinktype_id=drinktype_id, note=note)
 
     db.session.add(new_drink)
     db.session.commit()
@@ -48,3 +49,9 @@ def add_drinktype_post():
     db.session.commit()
 
     return redirect(url_for('main.add_drink'))
+
+@main.route('/get_drinks')
+def get_drinks():
+    drinks = Drink.query.all()
+
+    return jsonify(json_list = [d.toJSON() for d in drinks])
