@@ -54,6 +54,6 @@ def add_drinktype_post():
 @main.route('/get_drinks')
 @cross_origin()
 def get_drinks():
-    drinks = Drink.query.all()
+    drinks = Drink.query.order_by(Drink.created_at.desc()).filter()
 
     return jsonify(json_list = [d.toJSON() for d in drinks])
